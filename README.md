@@ -35,7 +35,7 @@ You can send a function variable or an anonymous function to be call when all th
   });`
 
 ### Further reading
-* Cache
+* Cache: 
   `lazy.load(['myScript.js','myOtherScript.js','myScript.js']);`
   myScript.js will be loaded only once
 
