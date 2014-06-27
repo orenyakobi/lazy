@@ -27,7 +27,9 @@ lazy.load('myScript.js,myStyle.css,myLessStyle.less');
 ### Dependencies
 Use the '<' operator to define dependencies while x < y means: x depand on y, so Lazy will make sure y is being loaded before x. You can also use '<' to define nested dependcies:
 
-`lazy.load([' loadMeLast.js < loadMeSecond.js < loadMeFirst.less ', 'LoadMeWhenEver.js');`
+```javascript
+lazy.load([' loadMeLast.js < loadMeSecond.js < loadMeFirst.less ', 'LoadMeWhenEver.js');
+```
 
 loadMeLast.js depand on loadMeSecond.js, which depend on loadMeFirst.less
 
@@ -42,7 +44,9 @@ lazy.load([' loadMeLast.js < loadMeFirst.less '], ['LoadMeWhenEver.js]', functio
 
 ### Further reading
 * Cache: 
-  `lazy.load(['myScript.js','myOtherScript.js','myScript.js']);`
+```javascript
+  lazy.load(['myScript.js','myOtherScript.js','myScript.js']);
+```
   myScript.js will be loaded only once
 
 * Note: For using Lazy with LESS files you have to (*lazy*) load [less.js](https://github.com/less/less.js) first
