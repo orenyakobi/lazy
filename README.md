@@ -14,7 +14,7 @@ Bower installation coming soon...
 Usage
 ----
 ### Asynchronic assets load
-`lazy.load(['myScript.js','myStyle.css','myLessStyle.less']);`
+`javascript lazy.load(['myScript.js','myStyle.css','myLessStyle.less']);`
 
 And this is also fine:
 
@@ -30,7 +30,8 @@ loadMeLast.js depand on loadMeSecond.js, which depend on loadMeFirst.less
 ### Lazy loading with callback
 You can send a function variable or an anonymous function to be call when all the files are loaded
 
-```lazy.load([' loadMeLast.js < loadMeFirst.less '], ['LoadMeWhenEver.js]', function(){
+```javascript
+  lazy.load([' loadMeLast.js < loadMeFirst.less '], ['LoadMeWhenEver.js]', function(){
   console.log('All files have been loaded');
 });
 ```
