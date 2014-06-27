@@ -12,6 +12,7 @@ Usage
 ----
 ### Asynchronic assets load
 `lazy.load(['myScript.js','myStyle.css','myLessStyle.less']);`
+
 And this will be fine as well:
 `lazy.load('myScript.js,myStyle.css,myLessStyle.less')`
 
