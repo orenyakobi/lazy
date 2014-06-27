@@ -28,7 +28,7 @@ lazy.load('myScript.js,myStyle.css,myLessStyle.less');
 Use the '<' operator to define dependencies while x < y means: x depand on y, so Lazy will make sure y is being loaded before x. You can also use '<' to define nested dependcies:
 
 ```javascript
-lazy.load([' loadMeLast.js < loadMeSecond.js < loadMeFirst.less '], ['LoadMeWhenEver.js', 'LoadMeWhenEverAsWell.js']);
+lazy.load(['loadMeLast.js < loadMeSecond.js < loadMeFirst.less'], ['LoadMeWhenEver.js', 'LoadMeWhenEverAsWell.js']);
 ```
 
 loadMeLast.js depand on loadMeSecond.js, which depend on loadMeFirst.less
@@ -37,7 +37,7 @@ loadMeLast.js depand on loadMeSecond.js, which depend on loadMeFirst.less
 You can send a function variable or an anonymous function as the second variable to be call when all the files are loaded
 
 ```javascript
-lazy.load([' loadMeLast.js < loadMeFirst.less ', 'LoadMeWhenEver.js'], function(){
+lazy.load(['loadMeLast.js < loadMeFirst.less ', 'LoadMeWhenEver.js'], function(){
     console.log('All files have been loaded');
 });
 ```
