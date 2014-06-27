@@ -6,7 +6,9 @@ On demand assets loader built with ease, nested dependencies support and cache c
 
 Installation
 ----
+Just include lazy.js on your DOM
 
+Bower installation coming soon...
 
 Usage
 ----
@@ -26,15 +28,16 @@ loadMeLast.js depand on loadMeSecond.js, which depend on loadMeFirst.less
 
 ### Lazy loading with callback
 You can send a function variable or an anonymous function to be call when all the files are loaded
-`lazy.load([' loadMeLast.js < loadMeFirst.less '], ['LoadMeWhenEver.js]', function(){
-  console.log('All files have been loaded');
-});`
+
+  `lazy.load([' loadMeLast.js < loadMeFirst.less '], ['LoadMeWhenEver.js]', function(){
+    console.log('All files have been loaded');
+  });`
 
 ### Further reading
 * Cache
 `lazy.load(['myScript.js','myOtherScript.js','myScript.js']);`
 myScript.js will be loaded only once
 
-* Depen
+* Note: For using Lazy with LESS files you have to (lazy) load [less.js](https://github.com/less/less.js) first
 
 
