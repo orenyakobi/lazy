@@ -43,11 +43,11 @@ lazy.load([' loadMeLast.js < loadMeFirst.less '], ['LoadMeWhenEver.js]', functio
 ```
 
 ### Further reading
-* Cache: 
+* Cache:
 ```javascript
-  lazy.load(['myScript.js','myOtherScript.js','myScript.js']);
+lazy.load(['myScript.js','myOtherScript.js','myScript.js']);
 ```
-  myScript.js will be loaded only once
+myScript.js will be loaded only once
 
 * Note: For using Lazy with LESS files you have to (*lazy*) load [less.js](https://github.com/less/less.js) first
 
