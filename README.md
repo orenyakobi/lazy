@@ -30,9 +30,10 @@ loadMeLast.js depand on loadMeSecond.js, which depend on loadMeFirst.less
 ### Lazy loading with callback
 You can send a function variable or an anonymous function to be call when all the files are loaded
 
-  `lazy.load([' loadMeLast.js < loadMeFirst.less '], ['LoadMeWhenEver.js]', function(){
-    console.log('All files have been loaded');
-  });`
+```lazy.load([' loadMeLast.js < loadMeFirst.less '], ['LoadMeWhenEver.js]', function(){
+  console.log('All files have been loaded');
+});
+```
 
 ### Further reading
 * Cache: 
