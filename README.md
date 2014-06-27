@@ -9,7 +9,7 @@ Installation
 ----
 Just include lazy.js on your DOM
 
-Bower installation coming soon...
+Bower, CDN and minify versions coming soon...
 
 Usage
 ----
