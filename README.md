@@ -8,7 +8,7 @@ On demand assets loader built with ease, nested dependencies support and cache c
 Installation
 ----
 
-* Install with [Bower]: `bower install lazyloader`
+* Install with bower: `bower install lazyloader`
 
 * Or clone it and add dist/lazy.js to your DOM: `git clone https://github.com/orenyakobi/lazy.git`
 
