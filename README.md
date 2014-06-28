@@ -10,11 +10,7 @@ Installation
 
 * Install with [Bower]: `bower install lazyloader`
 
-* Or clone it and put in your DOM: git clone https://github.com/orenyakobi/lazy.git
-
-Or just include lazy.js on your DOM
-
-Bower, CDN and minify versions coming soon...
+* Or clone it and add dist/lazy.js to your DOM: `git clone https://github.com/orenyakobi/lazy.git`
 
 Usage
 ----
