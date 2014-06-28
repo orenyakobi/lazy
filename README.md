@@ -1,7 +1,7 @@
 lazy
 ====
 
-Lightweight lazy loader for JS, CSS &amp; LESS assets.
+Lightweight (3KB!) lazy loader for JS, CSS &amp; LESS assets.
 
 On demand assets loader built with ease, nested dependencies support and cache care.
 
