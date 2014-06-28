@@ -1,18 +1,5 @@
 {
     "name": "Lazy",
     "version": "1.0.0",
-	"main": "dist/",
-    "ignore": [
-        "source",
-        "spec",
-        ".bowerrc",
-        ".gitignore",
-        ".jshintignore",
-        ".jshintrc",
-        "bower.json",
-        "gruntfile.js",
-        "package.json",
-        "README.md",
-		"node_modules"
-    ],
+	"main": "dist/"
 }
