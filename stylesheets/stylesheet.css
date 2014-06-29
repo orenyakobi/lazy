@@ -27,6 +27,32 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+		body{
+			font-family: 'Droid Sans','Lucida Grande',sans-serif;
+		}
+		h1{
+			font-weight: bold;
+			font-size: 6.5em !important;
+		}
+		.jumbotron{
+			color: white;
+			background-color: #c45268;
+			height: 350px;
+			padding-top: 80px;
+		}
+		main{
+			color: #666666;
+			font-size: 17px;
+			padding-top: 10px;
+		}
+		pre{
+			font-size: 1.4em;
+		    margin: 30px auto;
+			width: 401px;
+		}
+		h4{
+			margin-top: 50px;
+		}
 body {
 	line-height: 1;
 }
