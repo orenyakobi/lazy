@@ -59,7 +59,6 @@ var lazy = (function(){
             }
 
             function loadFile( loadedFilesObj ){
-                clog('@Loading: '+fileObj.path);
                 loadedFiles[fileObj.path] = 1;
 
                 if( fileObj.ext === 'less' ){
