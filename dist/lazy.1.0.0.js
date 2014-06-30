@@ -12,18 +12,15 @@ var lazy = (function(){
         load: function( files, externalClbk ){ 
             
             var removeFileString = function(fileString){
-                return function(){ 
-                    //only if there is external clbk
-                    if(typeof(externalClbk) !== 'undefined'){
-                        for(var i=0, len=files.length; i<len; i++){
-                            if(files[i] === fileString){
-                                files.splice((i>0 ? i-- : i), 1);
-                            }
+                return function(){
+                    for(var i=0, len=files.length; i<len; i++){
+                        if(files[i] === fileString){
+                            files.splice((i>0 ? i-- : i), 1);
                         }
-                        // Invoke the external callback
-                        if(!files.length){
-                            externalClbk();
-                        }
+                    }
+                    // Invoke the external callback
+                    if(!files.length){ 
+                        externalClbk();
                     }
                 };
             };
@@ -165,22 +162,21 @@ var lazy = (function(){
             // Constructor -----------------------------------------------------------------
             
             files = files instanceof Array ? files : [files]; 
-
             for( var i=0, len = files.length; i < len; i++ ){
-
                 var fileString = files[i].replace(/\s+/g, ''); //strip spaces
 
-                if( fileString.lastIndexOf('<') > 2 ){  
+                if( fileString.lastIndexOf('<') > 2 ){ 
                     //Handling dependencies
-                    (function(){
-                         var dependencies = fileString.split('<');
-                        (function loadDependency(){
+                     (function(){
+                        var filesString = files[i];
+                        var dependencies = fileString.split('<');
+                        return (function loadDependency(){
                             if(dependencies.length){  
                                 //loading dependencies recursively
                                 stageFileString( dependencies.pop(), loadDependency );
                             }else{
                                 // no more dependencies, remove file string (dependencies string)
-                                removeFileString( files[i] );
+                                removeFileString( filesString )();
                             }
                         }());
                     }());
