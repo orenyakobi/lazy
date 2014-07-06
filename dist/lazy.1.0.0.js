@@ -6,11 +6,11 @@
 * Licensed under the MIT license */
 var lazy = (function(){
     'use strict';
-    var cachedFiles = {}; 
-    
+    var cachedFiles = {};
+
     return {
-        load: function( files, externalClbk ){ 
-            
+        load: function( files, externalClbk ){
+
             var removeFileString = function(fileString){
                 return function(){
                     for(var i=0, len=files.length; i<len; i++){
@@ -18,13 +18,13 @@ var lazy = (function(){
                             files.splice((i>0 ? i-- : i), 1);
                         }
                     }
-                    // Invoke the external callback
-                    if(!files.length){ 
+                    // Invoke external callback
+                    if(!files.length){
                         externalClbk();
                     }
                 };
             };
-    
+
             var buildFileObject = function( fileString ){
                 var fileObj = {};
                 fileObj.ext = extractFileExtention( fileString );
@@ -33,10 +33,10 @@ var lazy = (function(){
                     return fileObj;
                 }else{
                     return false;
-                } 
+                }
             };
- 
-            var extractFileExtention = function( fileString ){ 
+
+            var extractFileExtention = function( fileString ){
                 var ext = fileString.split(/\#|\?/)[0].split('.').pop();
                 if( !/^\w+$/.test(ext) ){
                     dumpError( 'File extension is not specified ( '+fileString+' )' );
@@ -45,7 +45,7 @@ var lazy = (function(){
                     return ext;
                 }
             };
-            
+
             var createDomElement = function( fileObj ){
                 switch( fileObj.ext ){
                     case 'css':
@@ -59,7 +59,7 @@ var lazy = (function(){
                         elm.type = 'text/javascript';
                         return elm;
                     case 'less':
-                        var elm = document.createElement('style'); 
+                        var elm = document.createElement('style');
                         elm.id = 'lazyStyle';
                         return elm;
                     default:
@@ -67,7 +67,7 @@ var lazy = (function(){
                         return false;
                 }
             };
-            
+
             var dumpError = function( msg ){
                 console.log('~ Lazy Error: '+msg);
             };
@@ -83,12 +83,12 @@ var lazy = (function(){
                 }
                 return xmlhttp;
             };
-            
+
             var stageFileString = function( fileString, clbk ){
                 //if any case of 'file1,file2,file3' (not an array of files)
                 var fileSrtingArr = fileString.split(',');
-                for( var i=0, len = fileSrtingArr.length; i < len; i++ ){    
-                    if( typeof( cachedFiles[ fileSrtingArr[i] ] ) === 'undefined' ){ 
+                for( var i=0, len = fileSrtingArr.length; i < len; i++ ){
+                    if( typeof( cachedFiles[ fileSrtingArr[i] ] ) === 'undefined' ){
                        // If not cached, Loading the file
                        var fileObj = buildFileObject( fileString );
                        if(fileObj){
@@ -100,25 +100,28 @@ var lazy = (function(){
                    }
                }
             };
-            
+
             var loadFile = function( fileObj, clbk ){
-                cachedFiles[fileObj.path] = 1; 
+                cachedFiles[fileObj.path] = 1;
                 if( fileObj.ext === 'less' ){
-                    loadLess( fileObj, clbk ); 
+                    loadLess( fileObj, clbk );
                 }else{
                     var elm = createDomElement( fileObj ),
                         done = false,
                         head = document.getElementsByTagName('head')[0];
-                
+
                     head.appendChild(elm);
                     if(fileObj.ext === 'css'){
-                        //Hack for listening to link tag onload event 
+                        //Hack for listening to link tag onload event
                         var img = document.createElement('img');
                         img.onerror = function(){
-                            if( typeof(clbk) !== 'undefined' ) clbk();
+                            if( typeof(clbk) !== 'undefined' ){
+                                clbk();
+                            }
                         };
-                        img.src = fileObj.path;
-                    }else{ 
+                        img.src = '#';
+                    }else{
+                        // js file
                         elm.onload = elm.onreadystatechange = function () {
                             if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
                                 done = true;
@@ -127,17 +130,19 @@ var lazy = (function(){
                                 if (head && elm.parentNode) {
                                     head.removeChild(elm);
                                 }
-                                if( typeof(clbk) !== 'undefined' ) clbk();
+                                if( typeof(clbk) !== 'undefined' ){
+                                    clbk();
+                                }
                             }
                         };
                     }
                 }
             };
 
-            var loadLess = function( fileObj, clbk ){ 
+            var loadLess = function( fileObj, clbk ){
                 if( typeof(less) !== 'undefined' ){
                     cachedFiles[fileObj.path] = 1;
-                    var xmlhttp = getXmlHttp(); 
+                    var xmlhttp = getXmlHttp();
                     xmlhttp.onreadystatechange = function() {
                         if (xmlhttp.readyState===4) {
                             var parser = new less.Parser();
@@ -149,7 +154,9 @@ var lazy = (function(){
                                 }
                                 document.getElementById('lazyStyle').innerHTML = document.getElementById('lazyStyle').innerHTML + csscode;
                             });
-                            if( typeof(clbk) !== 'undefined' ) clbk();
+                            if( typeof(clbk) !== 'undefined' ){
+                                clbk();
+                            }
                         }
                     };
                     xmlhttp.open("GET", fileObj.path, true);
@@ -160,18 +167,18 @@ var lazy = (function(){
             };
 
             // Constructor -----------------------------------------------------------------
-            
-            files = files instanceof Array ? files : [files]; 
+
+            files = files instanceof Array ? files : [files];
             for( var i=0, len = files.length; i < len; i++ ){
                 var fileString = files[i].replace(/\s+/g, ''); //strip spaces
 
-                if( fileString.lastIndexOf('<') > 2 ){ 
+                if( fileString.lastIndexOf('<') > 2 ){
                     //Handling dependencies
                      (function(){
                         var filesString = files[i];
                         var dependencies = fileString.split('<');
                         return (function loadDependency(){
-                            if(dependencies.length){  
+                            if(dependencies.length){
                                 //loading dependencies recursively
                                 stageFileString( dependencies.pop(), loadDependency );
                             }else{
@@ -181,9 +188,9 @@ var lazy = (function(){
                         }());
                     }());
                 }else{
-                    //load non-depency file string asynchronically
+                    //load non-decadency file string asynchronously
                     stageFileString( fileString, removeFileString( files[i] ) );
-                }  
+                }
             }
         }
     };
