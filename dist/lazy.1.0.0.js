@@ -63,7 +63,7 @@ var lazy = (function(){
                         elm.id = 'lazyStyle';
                         return elm;
                     default:
-                        dumpError('Unsupported extension ( '+ext+' )');
+                        dumpError('Unsupported extension ( '+fileObj.ext+' )');
                         return false;
                 }
             };
@@ -109,32 +109,33 @@ var lazy = (function(){
                     var elm = createDomElement( fileObj ),
                         done = false,
                         head = document.getElementsByTagName('head')[0];
-
-                    head.appendChild(elm);
-                    if(fileObj.ext === 'css'){
-                        //Hack for listening to link tag onload event
-                        var img = document.createElement('img');
-                        img.onerror = function(){
-                            if( typeof(clbk) !== 'undefined' ){
-                                clbk();
-                            }
-                        };
-                        img.src = '#';
-                    }else{
-                        // js file
-                        elm.onload = elm.onreadystatechange = function () {
-                            if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
-                                done = true;
-                                // Handle memory leak in IE
-                                elm.onload = elm.onreadystatechange = null;
-                                if (head && elm.parentNode) {
-                                    head.removeChild(elm);
-                                }
+                    if(elm){
+                        head.appendChild(elm);
+                        if(fileObj.ext === 'css'){
+                            //Hack for listening to link tag onload event
+                            var img = document.createElement('img');
+                            img.onerror = function(){
                                 if( typeof(clbk) !== 'undefined' ){
                                     clbk();
                                 }
-                            }
-                        };
+                            };
+                            img.src = '#';
+                        }else{
+                            // js file
+                            elm.onload = elm.onreadystatechange = function () {
+                                if (!done && (!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+                                    done = true;
+                                    // Handle memory leak in IE
+                                    elm.onload = elm.onreadystatechange = null;
+                                    if (head && elm.parentNode) {
+                                        head.removeChild(elm);
+                                    }
+                                    if( typeof(clbk) !== 'undefined' ){
+                                        clbk();
+                                    }
+                                }
+                            };
+                        }
                     }
                 }
             };
