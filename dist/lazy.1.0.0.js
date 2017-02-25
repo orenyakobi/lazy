@@ -1,9 +1,9 @@
-/*! Lazy.JS - v1.0.0 - 2014-07-01
-* Lightweight lazy loader for JS, CSS & LESS assets.
-* http://orenyakobi.github.io/lazy
-*
-* Copyright (c) 2014 Oren yakobi <orenykb@gmail.com>;
-* Licensed under the MIT license */
+/*! Lazy.JS - v1.0.1 - 2014-07-01
+ * Lightweight lazy loader for JS, CSS & LESS assets.
+ * http://orenyakobi.github.io/lazy
+ *
+ * Copyright (c) 2014 Oren yakobi <orenykb@gmail.com>;
+ * Licensed under the MIT license */
 var lazy = (function(){
     'use strict';
     var cachedFiles = {};
@@ -27,7 +27,7 @@ var lazy = (function(){
 
             var buildFileObject = function( fileString ){
                 var fileObj = {};
-                fileObj.ext = extractFileExtention( fileString );
+                fileObj.ext = extractFileExtension( fileString );
                 if( fileObj.ext ){
                     fileObj.path = fileString.split(/\#|\?/)[0];
                     return fileObj;
@@ -36,7 +36,7 @@ var lazy = (function(){
                 }
             };
 
-            var extractFileExtention = function( fileString ){
+            var extractFileExtension = function( fileString ){
                 var ext = fileString.split(/\#|\?/)[0].split('.').pop();
                 if( !/^\w+$/.test(ext) ){
                     dumpError( 'File extension is not specified ( '+fileString+' )' );
@@ -63,7 +63,7 @@ var lazy = (function(){
                         elm.id = 'lazyStyle';
                         return elm;
                     default:
-                        dumpError('Unsupported extension ( '+fileObj.ext+' )');
+                        dumpError('Unsupported file extension ( '+fileObj.ext+' )');
                         return false;
                 }
             };
@@ -89,16 +89,16 @@ var lazy = (function(){
                 var fileSrtingArr = fileString.split(',');
                 for( var i=0, len = fileSrtingArr.length; i < len; i++ ){
                     if( typeof( cachedFiles[ fileSrtingArr[i] ] ) === 'undefined' ){
-                       // If not cached, Loading the file
-                       var fileObj = buildFileObject( fileString );
-                       if(fileObj){
-                           //valid file
-                           loadFile( fileObj, clbk );
-                       }else{
-                           break;
-                       }
-                   }
-               }
+                        // If not cached, Loading the file
+                        var fileObj = buildFileObject( fileSrtingArr[i] );
+                        if(fileObj){
+                            //valid file
+                            loadFile( fileObj, clbk );
+                        }else{
+                            break;
+                        }
+                    }
+                }
             };
 
             var loadFile = function( fileObj, clbk ){
@@ -175,7 +175,7 @@ var lazy = (function(){
 
                 if( fileString.lastIndexOf('<') > 2 ){
                     //Handling dependencies
-                     (function(){
+                    (function(){
                         var filesString = files[i];
                         var dependencies = fileString.split('<');
                         return (function loadDependency(){
