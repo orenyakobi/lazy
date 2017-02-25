@@ -1,6 +1,6 @@
 {
     "name": "Lazy",
-    "version": "1.0.0",
+    "version": "1.0.1",
 	"main": "dist/", 
 	"ignore": ["bower.json",".gitignore","README.md"]
 }
