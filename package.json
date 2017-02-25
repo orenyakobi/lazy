@@ -1,5 +1,5 @@
 {
-  "name": "lazy",
+  "name": "lazy-loader-lightweight",
   "version": "1.0.1",
   "description": "Lightweight lazy loader for JS, CSS & LESS assets.",
   "main": "/dist/lazy.1.0.0.min.js",
