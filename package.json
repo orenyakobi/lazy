@@ -1,0 +1,31 @@
+{
+  "name": "lazy",
+  "version": "1.0.1",
+  "description": "Lightweight lazy loader for JS, CSS & LESS assets.",
+  "main": "/dist/lazy.1.0.0.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/orenyakobi/lazy.git"
+  },
+  "keywords": [
+    "lazy",
+    "loading",
+    "assets",
+    "loading",
+    "less",
+    "lazy",
+    "loader",
+    "lazy",
+    "load",
+    "lazy"
+  ],
+  "author": "Oren Yakobi <orenykb@gmail.com> (www.orenyakobi.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/orenyakobi/lazy/issues"
+  },
+  "homepage": "https://github.com/orenyakobi/lazy#readme"
+}
